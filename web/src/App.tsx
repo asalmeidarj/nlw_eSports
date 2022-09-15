@@ -1,9 +1,11 @@
+import logoImage from './assets/logo.svg'
+
 function App() {
 
   return (
-    <h1 className="text-3xl font-bold underline bg-violet-600 text-center">
-      Hello world!
-    </h1>
+    <div>
+      <img src={logoImage} alt="logo da nlw eSport" />
+    </div>
   )
 }
 
