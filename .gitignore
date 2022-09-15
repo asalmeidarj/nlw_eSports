@@ -1,0 +1,12 @@
+# Diretórios
+back-end/node_modules
+back-end/build
+web/node_modules
+
+
+
+# Arquivos
+back-end/package-lock.json
+web/package-lock.json
+
+
