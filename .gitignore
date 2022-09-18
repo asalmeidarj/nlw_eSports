@@ -6,7 +6,9 @@ web/node_modules
 
 
 # Arquivos
+back-end/.env
 back-end/package-lock.json
+back-end/src/infrastructures/connection.ts
 web/package-lock.json
 
 

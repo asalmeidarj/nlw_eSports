@@ -1,20 +1,18 @@
-import express from 'express';
+//Importar módulos necessários para aplicação
+import customExpress from './config/customExpress';
+import * as dotenv from 'dotenv';
 
-import { Router, Request, Response } from 'express';
+// Abilitando o uso do dotenv
+dotenv.config()
 
-const PORT = 8080
+const PORT = process.env.PORT
 
-const app = express();
 
-const route = Router()
+// Inciando o Express configurado
+const app = customExpress;
 
-app.use(express.json())
-
-route.get('/teste-conexao', (req: Request, res: Response) => {
-  res.json({ message: 'Servidor conectado!' })
+// Iniciando o servidor
+app.listen(PORT, () => {
+  console.log("Servidor rodando na porta " + PORT)
 })
 
-app.use(route)
-
-
-app.listen(PORT, () => console.log('server rodando na porta ' + PORT))

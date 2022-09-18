@@ -1,4 +1,4 @@
-import { routers } from "../routers/routers";
+import { routers } from "../../routers/routers";
 import { Express } from "express";
 
 export default function loadRouters(app: Express): void {

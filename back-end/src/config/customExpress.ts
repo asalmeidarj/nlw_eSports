@@ -1,6 +1,6 @@
 import express from 'express'
 import { Express } from 'express'
-import loadRouters from '../utils/loadRouters'
+import loadRouters from '../utils/routers/loadRouters'
 
 //Configuração do Express
 const app: Express = express()

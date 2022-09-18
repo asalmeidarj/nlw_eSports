@@ -4,3 +4,5 @@ build
 
 # Arquivos
 package.-lock.json
+src/infrastructures/connection.ts
+.env
