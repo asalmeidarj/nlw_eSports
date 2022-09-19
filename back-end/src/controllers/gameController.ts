@@ -45,4 +45,12 @@ export const findAllAdsbyGameIdGet = async (req: Request, res: Response) => {
     return res.status(200).send(datas)
 }
 
+export const numberAdsByGameIdGet = async (req: Request, res: Response) => {
+    const gameId = req.params.id;
+    const numb = await adService.getNumberAdsByGameId(gameId)
+
+    return res.status(200).send(numb)
+}
+
+
 
