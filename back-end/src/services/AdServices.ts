@@ -20,4 +20,8 @@ export default class AdService {
     async findAllByGameId(id: String): Promise<IAd[]>{
         return  await this.adRepositorie.findAllByGameId(id)
     }
+
+    async getNumberAdsByGameId(id: string): Promise<Number>{
+        return 0
+    }
 }
