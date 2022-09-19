@@ -12,6 +12,8 @@ router.get('/games/:id/ads', gameController.findAllAdsbyGameIdGet)
 
 router.post('/games/:id/ads', gameController.createAdPost)
 
+router.get('/games/:id/number-ads', gameController.numberAdsByGameIdGet)
+
 
 
 export const gameRouter = router;
