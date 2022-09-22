@@ -35,9 +35,8 @@ export default class AdRepositorie {
         return datas
     }
 
-    async getNumberAdsByGameId(id: String): Promise<Number> {
+    async getNumberAdsByGameId(id: String): Promise<number> {
         const datas = await this.findAllByGameId(id)
-        const num = datas.length
-        return num
+        return datas.length
     }
 }
