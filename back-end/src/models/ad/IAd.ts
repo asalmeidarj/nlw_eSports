@@ -4,19 +4,21 @@ export interface IAd {
   name?: String;
   yearsPlaying?: Number;
   discord?: String;
-  weekDays?: {
-    mon: boolean,
-    tue: boolean,
-    wed: boolean,
-    thu: boolean,
-    fri: boolean,
-    sat: boolean,
-    sun: boolean,
-  };
-  hourStart?: Number; 
-  hourEnd?: Number; 
+  weekDays?: IWeekDays
+  hourStart?: Number;
+  hourEnd?: Number;
   useVoiceChannel?: Boolean;
   createdAd?: Date;
   gameId?: String;
 }
 
+// Interface criada para representar dias que usuários estão ativos
+export interface IWeekDays {
+  mon: boolean,
+  tue: boolean,
+  wed: boolean,
+  thu: boolean,
+  fri: boolean,
+  sat: boolean,
+  sun: boolean,
+}

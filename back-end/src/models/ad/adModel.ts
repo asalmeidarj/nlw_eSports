@@ -12,7 +12,7 @@ const adsSchema = new Schema<IAd>({
   hourStart: { type: Number, required: true },
   hourEnd: { type: Number, required: true} ,
   useVoiceChannel: { type: Boolean, required: true },
-  weekDays: { type: JSON, required: true },
+  weekDays: { type: Object, required: true },
   gameId: { type: String}
 });
 
