@@ -4,9 +4,17 @@ export interface IAd {
   name?: String;
   yearsPlaying?: Number;
   discord?: String;
-  weekDays?: JSON;
-  hourStart?: Number;        // horas em minutos
-  hourEnd?: Number;          // horas em minutos
+  weekDays?: {
+    mon: boolean,
+    tue: boolean,
+    wed: boolean,
+    thu: boolean,
+    fri: boolean,
+    sat: boolean,
+    sun: boolean,
+  };
+  hourStart?: Number; 
+  hourEnd?: Number; 
   useVoiceChannel?: Boolean;
   createdAd?: Date;
   gameId?: String;

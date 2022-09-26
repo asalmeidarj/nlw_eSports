@@ -54,6 +54,7 @@
     height: 30px;
     border-radius: 6px;
     cursor: pointer;
+    /*Estilos para desabilitar seleção de textos*/
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

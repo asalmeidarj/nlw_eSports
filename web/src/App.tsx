@@ -1,4 +1,10 @@
 import logoImage from './assets/logo.svg'
+import gameImage1 from './assets/game-1.png'
+import gameImage2 from './assets/game-2.png'
+import gameImage3 from './assets/game-3.png'
+import gameImage4 from './assets/game-4.png'
+import gameImage5 from './assets/game-5.png'
+import gameImage6 from './assets/game-6.png'
 import './styles/app.css'
 
 import CreateAdBanner from './componets/CreateAdBanner'
@@ -14,6 +20,7 @@ import { Input } from './componets/InputComponent'
 import { useEffect, useState } from 'react'
 import { GameController } from 'phosphor-react'
 import ButtonComponent from './componets/ButtonComponent/ButtonComponent'
+import SelectHardCoded from './componets/SelectHardCoded'
 
 
 
@@ -144,11 +151,11 @@ function App() {
       newStatusDays.sun = !statusDays.sun
 
     setStatusDays(newStatusDays)
-    handlerSetDays(statusDays)
+    handlerSetDays(newStatusDays)
   }
 
   const handlerSetDays = (obj: StatusDays) => {
-    let arrDays: Day[] = [
+    let arrayDays: Day[] = [
       { name: 'mon', status: obj.mon, text: 'S' },
       { name: 'tue', status: obj.tue, text: 'T' },
       { name: 'wed', status: obj.wed, text: 'Q' },
@@ -156,9 +163,8 @@ function App() {
       { name: 'fri', status: obj.fri, text: 'S' },
       { name: 'sat', status: obj.sat, text: 'S' },
       { name: 'sun', status: obj.sun, text: 'D' }
-    ]
-
-    setDays(arrDays)
+    ];
+    setDays(arrayDays)
   }
 
   const renderDivDays = (day: Day) => {
@@ -176,7 +182,7 @@ function App() {
 
   useEffect(() => {
 
-    const urlBase = 'http://localhost:8080'
+    const urlBase = 'http://localhost:808'
 
     async function useFetch() {
       const datas = await fetch(urlBase + '/games')
@@ -221,6 +227,15 @@ function App() {
               adsCount={game.numberAds}
             />
           ))}
+          {(games.length === 0) && [1, 2, 3, 4, 5, 6].map((index) => (
+            <GameBanner
+              key={index}
+              id={index + "Dump"}
+              bannerUrl={gameImage1}
+              title={'Exemplo'}
+              adsCount={0}
+            />
+          ))}
         </section>
         <Dialog.Root>
           <CreateAdBanner />
@@ -244,38 +259,18 @@ function App() {
                       </SelectScrollUpButton>
                       <SelectViewport>
                         <SelectGroup>
-                          <SelectLabel>Games</SelectLabel>
-                          <SelectItem value="Cs_Go">
-                            <SelectItemText>Cs Go</SelectItemText>
-                            <SelectItemIndicator>
-                              <CheckIcon />
-                            </SelectItemIndicator>
-                          </SelectItem>
-                          <SelectItem value="Dota">
-                            <SelectItemText>Dota</SelectItemText>
-                            <SelectItemIndicator>
-                              <CheckIcon />
-                            </SelectItemIndicator>
-                          </SelectItem>
-                          <SelectItem value="ClashRoyal">
-                            <SelectItemText>Clash Royal</SelectItemText>
-                            <SelectItemIndicator>
-                              <CheckIcon />
-                            </SelectItemIndicator>
-                          </SelectItem>
-                          <SelectItem value="Fortinite">
-                            <SelectItemText>Fortinite</SelectItemText>
-                            <SelectItemIndicator>
-                              <CheckIcon />
-                            </SelectItemIndicator>
-                          </SelectItem>
-                          <SelectItem value="APEX">
-                            <SelectItemText>APEX</SelectItemText>
-                            <SelectItemIndicator>
-                              <CheckIcon />
-                            </SelectItemIndicator>
-                          </SelectItem>
+                          {(games.length != 0) && <SelectLabel>Games (Consumidos pela API)</SelectLabel>}
+                          {games && games.map((game, i) => (
+                            <SelectItem key={i + 1000} value={game.title}>
+                              <SelectItemText>{game.title}</SelectItemText>
+                              <SelectItemIndicator>
+                                <CheckIcon />
+                              </SelectItemIndicator>
+                            </SelectItem>
+                          ))}
                         </SelectGroup>
+                        {/* Componente renderiza apenas quando não existe conexão com Banco de Dados */}
+                        {(games.length == 0) && <SelectHardCoded />}
                       </SelectViewport>
                       <SelectScrollDownButton>
                         <ChevronDownIcon />
@@ -302,7 +297,7 @@ function App() {
                     <label>Quando costuma jogar?</label>
                     <div className='box-days'>
                       {days.map((day, i) => (
-                        renderDivDays(day)
+                        <div key={i + 200}>{renderDivDays(day)}</div>
                       ))}
                     </div>
                   </div>
@@ -338,7 +333,6 @@ function App() {
             </Dialog.Content>
           </Dialog.Portal>
         </Dialog.Root>
-
       </main>
     </div>
   )
