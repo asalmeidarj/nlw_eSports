@@ -1,3 +1,71 @@
 .games > a > div {
     height: 50%;
 }
+
+/*
+.input-ads:-webkit-autofill,
+.input-ads:-webkit-autofill:hover, 
+.input-ads:-webkit-autofill:focus, 
+.input-ads:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 25px #18181B inset !important;
+    -webkit-text-fill-color: white !important;
+}
+*/
+
+.input-ads {
+    background-color: #18181B !important;
+    font-size: 14px;
+    height: 50px;
+    padding: 0 14px;
+    width: 100%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.agenda {
+    position: relative;
+    display: flex;
+    margin-top: 16px;
+    width: 100%;
+    min-height: 50px;
+}
+
+.div-agenda-esquerda {
+    position: relative;
+    width: 60%;
+    min-height: 50px;
+}
+
+.box-days {
+    display: flex;
+    margin-top: 26px;
+    margin-right: 24px;
+    justify-content: space-between;
+    gap: 2px;
+}
+
+.days {
+    position: relative;
+    background-color: #18181B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.day-active {
+    background-color: #8B5CF6;
+}
+
+.div-agenda-direita {
+    position: relative;
+}
