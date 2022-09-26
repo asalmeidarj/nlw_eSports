@@ -2,7 +2,7 @@ import { IconProps } from "phosphor-react";
 import styled from 'styled-components'
 
 
-interface ButtomProps{
+interface ButtonProps {
     width?: string,
     height?: string,
     padding?: string,
@@ -11,13 +11,12 @@ interface ButtomProps{
     hoverBackground?: string,
     text?: string,
     colorText?: string,
-    className?: string,
     iconComponent?: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>> | undefined,
-    sizeIcon?: string, 
+    sizeIcon?: string,
     colorIcon?: string,
 }
 
-let standard: ButtomProps = {
+let standard: ButtonProps = {
     width: '192px',
     height: '48px',
     padding: '12px 16px',
@@ -30,8 +29,29 @@ let standard: ButtomProps = {
     colorIcon: 'white',
 }
 
+const Button = styled.div<ButtonProps>`
+        width: ${(props) => (props.width)};
+        heigth: ${(props) => (props.height)};
+        border-radius: ${(props) => (props.borderRadius)};
+        padding: ${(props) => (props.padding)};
+        background-color: ${(props) => (props.backgroundColor)};
+        &:hover {
+            background-color: ${(props) => (props.hoverBackground)};
+        };
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        cursor: pointer;
+`
+interface SpanProps {
+    colorText: string,
+}
 
-function ButtonComponent(props: ButtomProps) {
+const Span = styled.span<SpanProps>`
+    color: ${(props) => (props.color)}
+`
+
+function ButtonComponent(props: ButtonProps) {
     const width = props.width ? props.width : standard.width
     const height = props.height ? props.height : standard.height
     const padding = props.padding ? props.padding : standard.padding
@@ -39,33 +59,22 @@ function ButtonComponent(props: ButtomProps) {
     const borderRadius = props.borderRadius ? props.borderRadius : standard.borderRadius
     const hoverBackground = props.hoverBackground ? props.hoverBackground : standard.hoverBackground
     const text = props.text ? props.text : standard.text
-    const className = props.className ? props.className : standard.className
     const IconComponent = props.iconComponent ? props.iconComponent : standard.iconComponent
     const sizeIcon = props.sizeIcon ? props.sizeIcon : standard.sizeIcon
     const colorIcon = props.colorIcon ? props.colorIcon : standard.colorIcon
     const colorText = props.colorText ? props.colorText : standard.colorText
 
-    const Span = styled.span`color: ${colorText}`
-
-    const Button = styled.div`
-        width: ${width};
-        heigth: ${height};
-        border-radius: ${borderRadius};
-        padding: ${padding};
-        background-color: ${backgroundColor};
-        &:hover {
-            background-color: ${hoverBackground};
-        };
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        cursor: pointer;
-    `
-
     return (
-        <Button className={className}>
-            {IconComponent && <IconComponent size={sizeIcon} color={colorIcon}/>}
-            <Span>{text}</Span>
+        <Button
+            width={width}
+            height={height}
+            backgroundColor={backgroundColor}
+            borderRadius={borderRadius}
+            hoverBackground={hoverBackground}
+            padding={padding}
+        >
+            {IconComponent && <IconComponent size={sizeIcon} color={colorIcon} />}
+            <Span colorText={colorText+""}>{text}</Span>
         </Button>
     )
 }

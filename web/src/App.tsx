@@ -12,7 +12,7 @@ import * as SelectComponents from './componets/SelectComponent'
 import { Input } from './componets/InputComponent'
 
 import { useEffect, useState } from 'react'
-import { Atom, GameController, MagnifyingGlassPlus } from 'phosphor-react'
+import { GameController } from 'phosphor-react'
 import ButtonComponent from './componets/ButtonComponent/ButtonComponent'
 
 
@@ -144,7 +144,7 @@ function App() {
       newStatusDays.sun = !statusDays.sun
 
     setStatusDays(newStatusDays)
-    handlerSetDays(newStatusDays)
+    handlerSetDays(statusDays)
   }
 
   const handlerSetDays = (obj: StatusDays) => {
@@ -176,7 +176,7 @@ function App() {
 
   useEffect(() => {
 
-    const urlBase = 'http://localhost:'
+    const urlBase = 'http://localhost:8080'
 
     async function useFetch() {
       const datas = await fetch(urlBase + '/games')
@@ -301,7 +301,7 @@ function App() {
                   <div className='div-agenda-esquerda'>
                     <label>Quando costuma jogar?</label>
                     <div className='box-days'>
-                      {days.map((day) => (
+                      {days.map((day, i) => (
                         renderDivDays(day)
                       ))}
                     </div>
@@ -324,7 +324,7 @@ function App() {
                 <div className='mt-8 flex gap-4 flex-row-reverse'>
                   <ButtonComponent
                     text='Encontrar duo'
-                    iconComponent={Atom}
+                    iconComponent={GameController}
                   />
                   <ButtonComponent
                     width='108px'
