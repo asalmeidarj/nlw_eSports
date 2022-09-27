@@ -1,7 +1,6 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { violet, mauve, blackA } from '@radix-ui/colors';
 import { styled } from '@stitches/react';
-import { Translate } from 'phosphor-react';
 
 const StyledTrigger = styled(SelectPrimitive.SelectTrigger, {
     all: 'unset',

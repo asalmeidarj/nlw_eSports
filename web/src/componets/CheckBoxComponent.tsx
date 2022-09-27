@@ -52,7 +52,7 @@ export const CheckboxComponent = (props: CheckBoxProps) => {
 
     return (
     <Flex css={{ alignItems: 'center' }}>
-      <Checkbox className={props.styled} id="c1" onCheckedChange={triggerCheck}>
+      <Checkbox className={props.styled} defaultChecked id="c1" onCheckedChange={triggerCheck}>
         <CheckboxIndicator>
           <CheckIcon />
         </CheckboxIndicator>

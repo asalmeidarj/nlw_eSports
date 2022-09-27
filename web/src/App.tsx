@@ -1,10 +1,5 @@
 import logoImage from './assets/logo.svg'
-import gameImage1 from './assets/game-1.png'
-import gameImage2 from './assets/game-2.png'
-import gameImage3 from './assets/game-3.png'
-import gameImage4 from './assets/game-4.png'
-import gameImage5 from './assets/game-5.png'
-import gameImage6 from './assets/game-6.png'
+import gameImage1 from './assets/game-2.png'
 import './styles/app.css'
 
 import CreateAdBanner from './componets/CreateAdBanner'
@@ -21,6 +16,9 @@ import { useEffect, useState } from 'react'
 import { GameController } from 'phosphor-react'
 import ButtonComponent from './componets/ButtonComponent/ButtonComponent'
 import SelectHardCoded from './componets/SelectHardCoded'
+
+import { IAd } from './models/IAd'
+import { saveAds } from './Repositories/AdsRepositorie'
 
 
 
@@ -39,11 +37,6 @@ const SelectLabel = SelectComponents.SelectLabel;
 /*const SelectSeparator = SelectComponents.SelectSeparator;*/
 const SelectScrollUpButton = SelectComponents.SelectScrollUpButton;
 const SelectScrollDownButton = SelectComponents.SelectScrollDownButton;
-
-
-interface Ad {
-
-}
 
 interface Game {
   _id: string,
@@ -92,14 +85,19 @@ function App() {
 
   const [games, setGames] = useState<Game[]>([])
 
+  const [gameIdSelected, setGameIdSelected] = useState<string>('')
   const [playerName, setPlayerName] = useState<string>('')
   const [yearsPlaying, setYearsPlaying] = useState<string>('')
   const [discord, setDiscord] = useState<string>('')
   const [hours, setHours] = useState<string[]>(['', ''])
   const [statusDays, setStatusDays] = useState<StatusDays>(varStatusDays)
   const [days, setDays] = useState<Day[]>(arrDays)
-  const [checked, setChecked] = useState<boolean>(false)
+  const [checked, setChecked] = useState<boolean>(true)
 
+
+  const handlerSelectItem = (value: string) => {
+    setGameIdSelected(value)
+  }
 
   const handlerChecked = () => {
     setChecked(!checked)
@@ -167,6 +165,26 @@ function App() {
     setDays(arrayDays)
   }
 
+  const handlerSaveAd = async () => {
+    const ad = getAd();
+    const res = await saveAds(ad)
+    console.log(res)
+  }
+
+  const getAd = (): IAd => {
+    let ad: IAd = {
+      name: playerName,
+      yearsPlaying: parseInt(yearsPlaying),
+      discord: discord,
+      weekDays: statusDays,     
+      hourStart: parseInt(hours[0]),
+      hourEnd: parseInt(hours[1]),
+      useVoiceChannel: checked, 
+      gameId: gameIdSelected,
+    }
+    return ad
+  }
+
   const renderDivDays = (day: Day) => {
     let classNameString = 'days '
     if (day.status) {
@@ -182,7 +200,7 @@ function App() {
 
   useEffect(() => {
 
-    const urlBase = 'http://localhost:808'
+    const urlBase = 'http://localhost:8080'
 
     async function useFetch() {
       const datas = await fetch(urlBase + '/games')
@@ -246,7 +264,7 @@ function App() {
               <form>
                 <div className='mt-8 flex flex-col'>
                   <label htmlFor="select-game">Qual o game?</label>
-                  <Select>
+                  <Select onValueChange={(value) => {handlerSelectItem(value)}}>
                     <SelectTrigger className='mt-4 bg-[#18181B] flex justify-between' aria-label="game">
                       <SelectValue placeholder="Selecione um game" />
                       <SelectIcon>
@@ -261,7 +279,7 @@ function App() {
                         <SelectGroup>
                           {(games.length != 0) && <SelectLabel>Games (Consumidos pela API)</SelectLabel>}
                           {games && games.map((game, i) => (
-                            <SelectItem key={i + 1000} value={game.title}>
+                            <SelectItem key={i + 1000} value={game._id}>
                               <SelectItemText>{game.title}</SelectItemText>
                               <SelectItemIndicator>
                                 <CheckIcon />
@@ -284,8 +302,8 @@ function App() {
                 </div>
                 <div className="flex gap-4 mt-4">
                   <div className='w-[50%]'>
-                    <label htmlFor="yearsPlaying">Quanto tempo joga?</label>
-                    <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="yearsPlaying" onChange={handlerYearsPlaying} placeholder='Pode ser zero' value={yearsPlaying}></Input>
+                    <label htmlFor="yearsPlaying">Quantos anos joga?</label>
+                    <Input autoComplete="off" type="number" className="input-ads w-[84%] mt-4" id="yearsPlaying" onChange={handlerYearsPlaying} placeholder='Pode ser zero' value={yearsPlaying}></Input>
                   </div>
                   <div className='w-[50%]'>
                     <label htmlFor="discord">Qual o seu discord?</label>
@@ -318,15 +336,20 @@ function App() {
                 </div>
                 <div className='mt-8 flex gap-4 flex-row-reverse'>
                   <ButtonComponent
+                    id="btn-cadastrar"
                     text='Encontrar duo'
                     iconComponent={GameController}
+                    onClick={handlerSaveAd}
                   />
-                  <ButtonComponent
-                    width='108px'
-                    backgroundColor="#71717A"
-                    hoverBackground="rgb(239 68 68 / 1)"
-                    text="Cancelar"
-                  />
+                  <Dialog.Trigger>
+                    <ButtonComponent
+                      id="btn-cancelar"
+                      width='108px'
+                      backgroundColor="#71717A"
+                      hoverBackground="rgb(239 68 68 / 1)"
+                      text="Cancelar"
+                    />
+                  </Dialog.Trigger>
                 </div>
               </form>
               <Dialog.Close />
@@ -337,5 +360,6 @@ function App() {
     </div>
   )
 }
+
 
 export default App

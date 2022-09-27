@@ -1,8 +1,11 @@
 import { IconProps } from "phosphor-react";
+import { MouseEventHandler } from "react";
 import styled from 'styled-components'
 
 
 interface ButtonProps {
+    onClick?: MouseEventHandler<HTMLDivElement> | undefined;
+    id?: string,
     width?: string,
     height?: string,
     padding?: string,
@@ -66,12 +69,14 @@ function ButtonComponent(props: ButtonProps) {
 
     return (
         <Button
+            id={props.id}
             width={width}
             height={height}
             backgroundColor={backgroundColor}
             borderRadius={borderRadius}
             hoverBackground={hoverBackground}
             padding={padding}
+            onClick={props.onClick}
         >
             {IconComponent && <IconComponent size={sizeIcon} color={colorIcon} />}
             <Span colorText={colorText+""}>{text}</Span>
