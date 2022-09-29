@@ -22,15 +22,13 @@ export function Home() {
     const subtitle = "Selecione o game que deseja jogar...";
 
     useEffect(() => {
-        fetch('http://192.168.0.105:8080/games')
-            .then(res => res.json())
-            .then(doc => doc.data)
-            .then(item => setGames(item))
+        loadGames();
+        return () => {}
     }, [])
 
-    async function loadGames() {
-        let res = await gameService.findAll();
-        setGames(res)
+    async function loadGames(){
+        const games = await gameService.findAll();
+        setGames(games)
     }
 
     return (
@@ -43,8 +41,8 @@ export function Home() {
             <Heading title={title} subtitle={subtitle}></Heading>
 
             <FlatList
-                data={GAMES}
-                keyExtractor={(item) => item.id}
+                data={games}
+                keyExtractor={(item) => `${item._id}`}
                 renderItem={({ item }) => (
                     <GameCard
                         data={item}
@@ -54,7 +52,6 @@ export function Home() {
                 horizontal
                 contentContainerStyle={styles.contentList}
             />
-            <Heading title="GAMES" subtitle={"" + games[0].title}></Heading>
 
         </View>
     );

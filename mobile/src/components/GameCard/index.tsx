@@ -7,22 +7,22 @@ import { THEME } from '../../theme';
 
 
 export interface GameCardProps {
-    id: string;
-    name: string;
-    ads: string;
-    cover: ImageSourcePropType;
+  _id: string;
+  bannerUrl: string;
+  title: string;
+  numberAds: number;
 }
+
 
 interface Props {
     data: GameCardProps
 }
 
-
 export function GameCard({ data, ...rest }: Props) {
   return (
     <TouchableOpacity style={styles.container} {...rest}>
         <ImageBackground
-            source={data.cover}
+            source={ {uri: "http://192.168.0.105:19000/assets" + `${data.bannerUrl}`} }
             style={styles.cover}
         >
 
@@ -30,8 +30,8 @@ export function GameCard({ data, ...rest }: Props) {
             colors={THEME.COLORS.FOOTER}
             style={styles.footer}
           >
-            <Text style={styles.name}>{data.name}</Text>
-            <Text style={styles.ads}>{data.ads} anúncios</Text>
+            <Text style={styles.name}>{data.title}</Text>
+            <Text style={styles.ads}>{data.numberAds} anúncios</Text>
           </LinearGradient>
 
         </ImageBackground>
