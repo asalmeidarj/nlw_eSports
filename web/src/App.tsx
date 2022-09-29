@@ -176,10 +176,10 @@ function App() {
       name: playerName,
       yearsPlaying: parseInt(yearsPlaying),
       discord: discord,
-      weekDays: statusDays,     
+      weekDays: statusDays,
       hourStart: parseInt(hours[0]),
       hourEnd: parseInt(hours[1]),
-      useVoiceChannel: checked, 
+      useVoiceChannel: checked,
       gameId: gameIdSelected,
     }
     return ad
@@ -255,107 +255,110 @@ function App() {
             />
           ))}
         </section>
-        <Dialog.Root>
-          <CreateAdBanner />
-          <Dialog.Portal>
-            <Dialog.Overlay className='bg-black/60 inset-0 fixed' />
-            <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-lg shadow-black/25'>
-              <Dialog.Title className='text-3xl font-black'>Publique um anúncio</Dialog.Title>
-              <form>
-                <div className='mt-8 flex flex-col'>
-                  <label htmlFor="select-game">Qual o game?</label>
-                  <Select onValueChange={(value) => {handlerSelectItem(value)}}>
-                    <SelectTrigger className='mt-4 bg-[#18181B] flex justify-between' aria-label="game">
-                      <SelectValue placeholder="Selecione um game" />
-                      <SelectIcon>
-                        <ChevronDownIcon />
-                      </SelectIcon>
-                    </SelectTrigger>
-                    <SelectContent className='w-[85%] px-4 py-6 fixed top-[20%] left-[50%] -translate-x-1/2'>
-                      <SelectScrollUpButton>
-                        <ChevronUpIcon />
-                      </SelectScrollUpButton>
-                      <SelectViewport>
-                        <SelectGroup>
-                          {(games.length != 0) && <SelectLabel>Games (Consumidos pela API)</SelectLabel>}
-                          {games && games.map((game, i) => (
-                            <SelectItem key={i + 1000} value={game._id}>
-                              <SelectItemText>{game.title}</SelectItemText>
-                              <SelectItemIndicator>
-                                <CheckIcon />
-                              </SelectItemIndicator>
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                        {/* Componente renderiza apenas quando não existe conexão com Banco de Dados */}
-                        {(games.length == 0) && <SelectHardCoded />}
-                      </SelectViewport>
-                      <SelectScrollDownButton>
-                        <ChevronDownIcon />
-                      </SelectScrollDownButton>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className='flex flex-col mt-4 gap-4'>
-                  <label htmlFor="playerName">Seu nome (ou nickname)</label>
-                  <Input autoComplete="off" className="input-ads" id="playerName" onChange={handlerPlayerName} placeholder='Como te chamam dentro do game?' value={playerName}></Input>
-                </div>
-                <div className="flex gap-4 mt-4">
-                  <div className='w-[50%]'>
-                    <label htmlFor="yearsPlaying">Quantos anos joga?</label>
-                    <Input autoComplete="off" type="number" className="input-ads w-[84%] mt-4" id="yearsPlaying" onChange={handlerYearsPlaying} placeholder='Pode ser zero' value={yearsPlaying}></Input>
+        <div className="bg-nlw-gradient pt-1 self-stretch rounded-lg mt-8">
+          <Dialog.Root>
+            <CreateAdBanner />
+            <Dialog.Portal>
+              <Dialog.Overlay className='bg-black/60 inset-0 fixed' />
+              <Dialog.Content className='fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] shadow-lg shadow-black/25'>
+                <Dialog.Title className='text-3xl font-black'>Publique um anúncio</Dialog.Title>
+                <form>
+                  <div className='mt-8 flex flex-col'>
+                    <label htmlFor="select-game">Qual o game?</label>
+                    <Select onValueChange={(value) => { handlerSelectItem(value) }}>
+                      <SelectTrigger className='mt-4 bg-[#18181B] flex justify-between' aria-label="game">
+                        <SelectValue placeholder="Selecione um game" />
+                        <SelectIcon>
+                          <ChevronDownIcon />
+                        </SelectIcon>
+                      </SelectTrigger>
+                      <SelectContent className='w-[85%] px-4 py-6 fixed top-[20%] left-[50%] -translate-x-1/2'>
+                        <SelectScrollUpButton>
+                          <ChevronUpIcon />
+                        </SelectScrollUpButton>
+                        <SelectViewport>
+                          <SelectGroup>
+                            {(games.length != 0) && <SelectLabel>Games (Consumidos pela API)</SelectLabel>}
+                            {games && games.map((game, i) => (
+                              <SelectItem key={i + 1000} value={game._id}>
+                                <SelectItemText>{game.title}</SelectItemText>
+                                <SelectItemIndicator>
+                                  <CheckIcon />
+                                </SelectItemIndicator>
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                          {/* Componente renderiza apenas quando não existe conexão com Banco de Dados */}
+                          {(games.length == 0) && <SelectHardCoded />}
+                        </SelectViewport>
+                        <SelectScrollDownButton>
+                          <ChevronDownIcon />
+                        </SelectScrollDownButton>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  <div className='w-[50%]'>
-                    <label htmlFor="discord">Qual o seu discord?</label>
-                    <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="discord" onChange={handlerDiscord} placeholder='usuario#0000' value={discord}></Input>
+                  <div className='flex flex-col mt-4 gap-4'>
+                    <label htmlFor="playerName">Seu nome (ou nickname)</label>
+                    <Input autoComplete="off" className="input-ads" id="playerName" onChange={handlerPlayerName} placeholder='Como te chamam dentro do game?' value={playerName}></Input>
                   </div>
-                </div>
-                <div className='agenda'>
-                  <div className='div-agenda-esquerda'>
-                    <label>Quando costuma jogar?</label>
-                    <div className='box-days'>
-                      {days.map((day, i) => (
-                        <div key={i + 200}>{renderDivDays(day)}</div>
-                      ))}
+                  <div className="flex gap-4 mt-4">
+                    <div className='w-[50%]'>
+                      <label htmlFor="yearsPlaying">Quantos anos joga?</label>
+                      <Input autoComplete="off" type="number" className="input-ads w-[84%] mt-4" id="yearsPlaying" onChange={handlerYearsPlaying} placeholder='Pode ser zero' value={yearsPlaying}></Input>
+                    </div>
+                    <div className='w-[50%]'>
+                      <label htmlFor="discord">Qual o seu discord?</label>
+                      <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="discord" onChange={handlerDiscord} placeholder='usuario#0000' value={discord}></Input>
                     </div>
                   </div>
-                  <div className='div-agenda-direita'>
-                    <label>Qual horário do dia?</label>
-                    <div className='flex gap-2'>
-                      <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="hourStart" type="number" min='0' max='23' onChange={handlerHours} placeholder='De'></Input>
-                      <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="hourEnd" type="number" min='0' max='23' onChange={handlerHours} placeholder='Até'></Input>
+                  <div className='agenda'>
+                    <div className='div-agenda-esquerda'>
+                      <label>Quando costuma jogar?</label>
+                      <div className='box-days'>
+                        {days.map((day, i) => (
+                          <div key={i + 200}>{renderDivDays(day)}</div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className='div-agenda-direita'>
+                      <label>Qual horário do dia?</label>
+                      <div className='flex gap-2'>
+                        <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="hourStart" type="number" min='0' max='23' onChange={handlerHours} placeholder='De'></Input>
+                        <Input autoComplete="off" className="input-ads w-[84%] mt-4" id="hourEnd" type="number" min='0' max='23' onChange={handlerHours} placeholder='Até'></Input>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className='mt-4'>
-                  <CheckboxComponent
-                    styled="bg-[#18181B]"
-                    text={'Costumo me conectar ao chat de voz'}
-                    checked={handlerChecked}
-                  />
-                </div>
-                <div className='mt-8 flex gap-4 flex-row-reverse'>
-                  <ButtonComponent
-                    id="btn-cadastrar"
-                    text='Encontrar duo'
-                    iconComponent={GameController}
-                    onClick={handlerSaveAd}
-                  />
-                  <Dialog.Trigger>
-                    <ButtonComponent
-                      id="btn-cancelar"
-                      width='108px'
-                      backgroundColor="#71717A"
-                      hoverBackground="rgb(239 68 68 / 1)"
-                      text="Cancelar"
+                  <div className='mt-4'>
+                    <CheckboxComponent
+                      styled="bg-[#18181B]"
+                      text={'Costumo me conectar ao chat de voz'}
+                      checked={handlerChecked}
                     />
-                  </Dialog.Trigger>
-                </div>
-              </form>
-              <Dialog.Close />
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
+                  </div>
+                  <div className='mt-8 flex gap-4 flex-row-reverse'>
+                    <ButtonComponent
+                      id="btn-cadastrar"
+                      text='Encontrar duo'
+                      iconComponent={GameController}
+                      onClick={handlerSaveAd}
+                    />
+                    <Dialog.Trigger>
+                      <ButtonComponent
+                        id="btn-cancelar"
+                        width='108px'
+                        backgroundColor="#71717A"
+                        hoverBackground="rgb(239 68 68 / 1)"
+                        text="Cancelar"
+                      />
+                    </Dialog.Trigger>
+                  </div>
+                </form>
+                <Dialog.Close />
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        </div>
+
       </main>
     </div>
   )
