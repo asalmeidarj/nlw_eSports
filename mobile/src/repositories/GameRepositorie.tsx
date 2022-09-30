@@ -1,4 +1,5 @@
 import {useHttpRequest} from "../hooks/useHttpRequest";
+import { IAd } from "../models/IAd";
 import { IGame } from "../models/IGame";
 
 const http = useHttpRequest;
@@ -27,5 +28,11 @@ export async function getNumbersAdsByGameId(id: string): Promise<number> {
     const url = urlBase + `/games/${id}/number-ads`
     const num: number = await http.get(url).then( doc => doc.number)
     return num
+}
+
+export async function getAdsByGameId(id: string): Promise<IAd[]> {
+    const url = urlBase + `/games/${id}/ads`
+    const ads: IAd[] = await http.get(url)
+    return ads
 }
  
