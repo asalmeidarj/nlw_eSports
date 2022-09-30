@@ -1,21 +1,15 @@
-import { TouchableOpacity, ImageBackground, ImageSourcePropType, Text } from 'react-native';
+import { TouchableOpacity, ImageBackground, Text } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { styles } from './styles';
 import { THEME } from '../../theme';
+import { IGame } from '../../models/IGame';
 
-
-export interface GameCardProps {
-  _id: string;
-  bannerUrl: string;
-  title: string;
-  numberAds: number;
-}
 
 
 interface Props {
-    data: GameCardProps
+    data: IGame
 }
 
 export function GameCard({ data, ...rest }: Props) {
