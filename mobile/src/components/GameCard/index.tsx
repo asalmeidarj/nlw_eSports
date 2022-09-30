@@ -1,4 +1,4 @@
-import { TouchableOpacity, ImageBackground, Text } from 'react-native';
+import { TouchableOpacity, ImageBackground, Text, TouchableOpacityProps } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -8,7 +8,7 @@ import { IGame } from '../../models/IGame';
 
 
 
-interface Props {
+interface Props extends TouchableOpacityProps {
     data: IGame
 }
 
