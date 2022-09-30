@@ -1,15 +1,15 @@
 // Cria uma interface representando um documento no MongoDB
 export interface IAd {
-    id?: String,
-    name?: String;
-    yearsPlaying?: Number;
-    discord?: String;
+    _id?: string,
+    name?: string;
+    yearsPlaying?: number;
+    discord?: string;
     weekDays?: IWeekDays
-    hourStart?: Number;
-    hourEnd?: Number;
-    useVoiceChannel?: Boolean;
+    hourStart?: number;
+    hourEnd?: number;
+    useVoiceChannel?: boolean;
     createdAd?: Date;
-    gameId?: String;
+    gameId?: string;
   }
   
   // Interface criada para representar dias que usuários estão ativos
