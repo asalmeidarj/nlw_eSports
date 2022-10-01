@@ -1,4 +1,4 @@
-import { Text, TouchableOpacityProps, View } from 'react-native';
+import { Text, Touchable, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 
 import { Entypo } from '@expo/vector-icons'
 
@@ -20,7 +20,7 @@ interface Props extends TouchableOpacityProps {
 }
 
 export function Button({
-    backgroundColor = `${THEME.COLORS.BUTTON}`,
+    backgroundColor = `${THEME.COLORS.PRIMARY}`,
     text = '',
     colorText = 'white',
     fontSize = 14,
@@ -34,7 +34,7 @@ export function Button({
     ...rest }: Props) {
 
     return (
-        <View
+        <TouchableOpacity
             style={[
                 styles.container,
                 { backgroundColor: `${backgroundColor}` },
@@ -58,6 +58,6 @@ export function Button({
             >
                 {text}
             </Text>
-        </View>
+        </TouchableOpacity>
     );
 }
