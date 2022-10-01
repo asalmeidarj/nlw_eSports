@@ -28,7 +28,6 @@ export function Home() {
 
     useEffect(() => {
         loadGames();
-        return () => { }
     }, [])
 
     async function loadGames() {
