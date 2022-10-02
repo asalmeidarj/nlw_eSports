@@ -11,9 +11,10 @@ import {getNumberOfDaysTrue} from './utils/functions'
 
 interface Props extends ViewProps {
     data: IAd,
+    setData: Function
 }
 
-export function DuoCard({ data }: Props) {
+export function DuoCard({ data, setData }: Props) {
 
     const colorVoiceChannelText = 
         data.useVoiceChannel ? 
@@ -21,6 +22,7 @@ export function DuoCard({ data }: Props) {
         THEME.COLORS.ALERT
 
     const ActiveDays = getNumberOfDaysTrue(data.weekDays)
+    
 
     return (
         <View style={styles.container}>
@@ -46,6 +48,7 @@ export function DuoCard({ data }: Props) {
 
             <Button 
                 text="Conectar"
+                onPress={()=> setData(data)}
             />
 
         </View>
