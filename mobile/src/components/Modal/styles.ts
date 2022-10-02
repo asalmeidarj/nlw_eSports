@@ -26,7 +26,34 @@ export const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: THEME.COLORS.SHAPE,
-    minWidth: 200,
-    minHeight: 200,
+    minWidth: 312,
+    minHeight: 312,
+    borderRadius: 8,
+    paddingHorizontal: 40,
+    paddingVertical: 32,
+    display:"flex",
+    flexDirection:"column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  sectionDiscord: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: 24,
+    width: '100%',
+  },
+  discordLabel: {
+    textAlign: 'center',
+    color: THEME.COLORS.TEXT
+  },
+  discordContent: {
+    textAlign: 'center',
+    width: 200,
+    backgroundColor: THEME.COLORS.BACKGROUND_800,
+    color: THEME.COLORS.CAPTION_300,
+    marginTop: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 11,
+    borderRadius: 4
   }
 });
