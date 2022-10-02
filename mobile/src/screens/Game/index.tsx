@@ -16,6 +16,7 @@ import { IGame } from '../../models/IGame';
 import { IAd } from '../../models/IAd';
 
 import * as gameService from '../../services/GameService'
+import { Modal } from '../../components/Modal';
 
 export function Game() {
 
@@ -24,9 +25,20 @@ export function Game() {
     const game = route.params as IGame
 
     const [ads, setAds] = useState<IAd[]>([])
+    const [visible, setVisible] = useState<boolean>()
+    const [dataModal, setDataModal] = useState<IAd>()
 
     function handleGoBack() {
         navigation.goBack();
+    }
+
+    function handleSetDataModal(obj: IAd){
+        setDataModal(obj)
+        setVisible(true)
+    }
+
+    function closeModal() {
+        setVisible(false)
     }
 
     useEffect(() => {
@@ -38,11 +50,6 @@ export function Game() {
         const ads = await gameService.findAdsByGameId(game._id)
         setAds(ads)
     }
-
-    function onConect() {
-
-    }
-
 
     return (
         <Background>
@@ -81,6 +88,7 @@ export function Game() {
                     renderItem={({ item }) => (
                         <DuoCard
                             data={item}
+                            setData={handleSetDataModal}
                         />
                     )}
                     showsHorizontalScrollIndicator={false}
@@ -92,6 +100,11 @@ export function Game() {
                 />
 
             </SafeAreaView>
+            <Modal 
+                closeModel={closeModal}
+                visible={visible}
+                data={dataModal}
+            />
         </Background>
     );
 }
