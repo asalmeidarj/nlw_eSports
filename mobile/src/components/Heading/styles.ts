@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { THEME } from '../../theme';
+import { Background } from '../Background';
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,6 +12,11 @@ export const styles = StyleSheet.create({
     fontSize: THEME.FONT_SIZE.LG,
     fontFamily: THEME.FONT_FAMILY.BLACK,
     color: THEME.COLORS.TEXT,
+  },
+  titleCenter: {
+    display: 'flex', 
+    justifyContent: 'center', 
+    flexDirection: 'row',
   },
   subtitle: {
     fontSize: THEME.FONT_SIZE.MD,
